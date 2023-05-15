@@ -16,15 +16,15 @@ const Alternative = ({ letter, alternative, id }) => {
   )
 };
 
-export const Question = ({ mensagem, id }) => {
+export const Question = ({ message, id }) => {
 
-  const alterntives = mensagem["exercicio 1"]["alternativas"]
+  const alterntives = message["exercicio 1"]["alternativas"]
   const alterntivesObj = Object.entries(alterntives);
 
   return (
     <>
       <div className='question'>
-        <p className='statement'> {mensagem["exercicio 1"]["enunciado"]} </p>
+        <p className='statement'> {message["exercicio 1"]["enunciado"]} </p>
         {alterntivesObj.map(([key, value]) => (
           <Alternative letter={key} alternative={value} id={id} />
         ))}
