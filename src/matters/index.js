@@ -6,17 +6,13 @@ import '../matters/matters.css'
 export const Matters = ({ questions, matterTitle }) => {
 
   const [showExercises, setShowExercises] = useState(false);
-  const [chamamodal, setchama] = useState(false);
+  const [callModal, setchama] = useState(false);
   const [style, setStyle] = useState('button');
-  const [mensagem, setMensagem] = useState('');
+  const [message, setMessage] = useState('');
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleButtonClick = (id) => {
-    if (id === selectedButton) {
-      setSelectedButton(null);
-    } else {
-      setSelectedButton(id);
-    }
+    id === selectedButton ? setSelectedButton(null) : setSelectedButton(id);
   };
 
   return (
@@ -39,24 +35,23 @@ export const Matters = ({ questions, matterTitle }) => {
 
             questions.map((item) => (
               <>
-                {console.log(item)}
                 <Exercices
                   key={item.id}
                   style={item.id === selectedButton ? 'exercise-selected' : 'exercise'}
                   exercise={item["exercicio 1"]["numero"]}
                   onClick={() => {
                     handleButtonClick(item.id)
-                    setchama(chamamodal && item.id === selectedButton ? false : true)
-                    setMensagem(item["exercicio 1"])
+                    setchama(callModal && item.id === selectedButton ? false : true)
+                    setMessage(item)
                   }} />
               </>
             )
             )}
         </div>
 
-        {chamamodal && showExercises &&
+        {callModal && showExercises &&
           <div className='questions-component'>
-            <Question mensagem={mensagem} />
+            <Question message={message} id={selectedButton} />
           </div>}
       </div>
 

@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import './exercises.css'
 
-const Alternative = ({ letter, alternative }) => {
-
-  const [style, setStyle] = useState('letter');
+const Alternative = ({ letter, alternative, id }) => {
+  const [selectedButton, setSelectedButton] = useState(null);
 
   return (
     <div className='alternative'>
-      <button className={style} onClick={() => setStyle(style === 'letter' ? 'clickedLetter' : 'letter')}>
+      <button
+        className={id === selectedButton ? 'clickedLetter' : 'letter'}
+        onClick={() => id === selectedButton ? setSelectedButton(null) : setSelectedButton(id)}>
         {letter}
       </button>
       <p className='alternatives'>{alternative}</p>
@@ -15,17 +16,17 @@ const Alternative = ({ letter, alternative }) => {
   )
 };
 
-export const Question = ({ mensagem }) => {
+export const Question = ({ mensagem, id }) => {
 
-  const alterntives = Object.entries(mensagem["alternativas"]);
+  const alterntives = mensagem["exercicio 1"]["alternativas"]
+  const alterntivesObj = Object.entries(alterntives);
 
   return (
     <>
       <div className='question'>
-        <p className='statement'> {mensagem["enunciado"]} </p>
-
-        {alterntives.map(([key, value]) => (
-          <Alternative letter={key} alternative={value} />
+        <p className='statement'> {mensagem["exercicio 1"]["enunciado"]} </p>
+        {alterntivesObj.map(([key, value]) => (
+          <Alternative letter={key} alternative={value} id={id} />
         ))}
       </div>
     </>
