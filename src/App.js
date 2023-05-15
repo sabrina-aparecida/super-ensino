@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React from 'react';
+import Matters from './matters';
+import ALL_MATTERS from './matters/all_matters.js'
 import './App.css';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="app">
+        {ALL_MATTERS.map(item => {
+          return (
+            <div >
+              <Matters
+                matterTitle={item["materia"]}
+                questions={item["questoes"]}
+                info={item} />
+            </div>
+          )
+        })}
+      </div>
+    </>
   );
-}
+};
 
 export default App;
